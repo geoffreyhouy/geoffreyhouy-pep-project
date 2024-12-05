@@ -11,11 +11,6 @@ import Util.ConnectionUtil;
 
 public class AccountDAO {
 
-    /**
-     * 
-     * @param account
-     * @return
-     */
     public Account register(Account account) {
         Connection connection = ConnectionUtil.getConnection();
         try {
@@ -38,12 +33,6 @@ public class AccountDAO {
         return null;
     }
 
-    /**
-     * 
-     * @param username
-     * @param password
-     * @return
-     */
     public Account login(String username, String password) {
         Connection connection = ConnectionUtil.getConnection();
         try {
@@ -66,11 +55,6 @@ public class AccountDAO {
         return null;
     }
 
-    /**
-     * 
-     * @param accountId
-     * @return
-     */
     public Account getAccountByAccountId(int accountId) {
         Connection connection = ConnectionUtil.getConnection();
         try {
@@ -92,11 +76,6 @@ public class AccountDAO {
         return null;
     }
 
-    /**
-     * 
-     * @param username
-     * @return
-     */
     public Account getAccountByUsername(String username) {
         Connection connection = ConnectionUtil.getConnection();
         try {

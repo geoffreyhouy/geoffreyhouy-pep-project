@@ -14,11 +14,6 @@ public class AccountService {
         this.accountDAO = accountDAO;
     }
 
-    /**
-     * 
-     * @param account
-     * @return
-     */
     public Account register(Account account) {
         String username = account.getUsername();
         if (username.length() == 0) {
@@ -34,11 +29,6 @@ public class AccountService {
         return accountDAO.register(account);
     }
 
-    /**
-     * 
-     * @param account
-     * @return
-     */
     public Account login(Account account) {
         String username = account.getUsername();
         String password = account.getPassword();

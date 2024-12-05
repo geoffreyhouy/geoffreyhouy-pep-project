@@ -13,11 +13,6 @@ import Util.ConnectionUtil;
 
 public class MessageDAO {
 
-    /**
-     * 
-     * @param message
-     * @return
-     */
     public Message createMessage(Message message) {
         Connection connection = ConnectionUtil.getConnection();
         try {
@@ -42,10 +37,6 @@ public class MessageDAO {
         return null;
     }
 
-    /**
-     * 
-     * @return
-     */
     public List<Message> getAllMessages() {
         Connection connection = ConnectionUtil.getConnection();
         List<Message> messages = new ArrayList<>();
@@ -68,11 +59,6 @@ public class MessageDAO {
         return messages;
     }
 
-    /**
-     * 
-     * @param messageId
-     * @return
-     */
     public Message getMessageByMessageId(int messageId) {
         Connection connection = ConnectionUtil.getConnection();
         try {
@@ -95,11 +81,6 @@ public class MessageDAO {
         return null;
     }
 
-    /**
-     * 
-     * @param messageId
-     * @return
-     */
     public int deleteMessageByMessageId(int messageId) {
         Connection connection = ConnectionUtil.getConnection();
         try {
@@ -113,12 +94,6 @@ public class MessageDAO {
         return 0;
     }
 
-    /**
-     * 
-     * @param messageId
-     * @param messageText
-     * @return
-     */
     public int updateMessageByMessageId(int messageId, String messageText) {
         Connection connection = ConnectionUtil.getConnection();
         try {
@@ -133,11 +108,6 @@ public class MessageDAO {
         return 0;
     }
 
-    /**
-     * 
-     * @param accountId
-     * @return
-     */
     public List<Message> getAllMessagesByAccountId(int accountId) {
         Connection connection = ConnectionUtil.getConnection();
         List<Message> messages = new ArrayList<>();

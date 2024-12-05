@@ -17,11 +17,6 @@ public class MessageService {
         this.messageDAO = messageDAO;
     }
 
-    /**
-     * 
-     * @param message
-     * @return
-     */
     public Message createMessage(Message message) {
         String messageText = message.getMessage_text();
         if (messageText.length() == 0) {
@@ -38,28 +33,14 @@ public class MessageService {
         return messageDAO.createMessage(message);
     }
 
-    /**
-     * 
-     * @return
-     */
     public List<Message> getAllMessages() {
         return messageDAO.getAllMessages();
     }
 
-    /**
-     * 
-     * @param messageId
-     * @return
-     */
     public Message getMessageByMessageId(int messageId) {
         return messageDAO.getMessageByMessageId(messageId);
     }
 
-    /**
-     * 
-     * @param messageId
-     * @return
-     */
     public Message deleteMessageByMessageId(int messageId) {
         Message messageToDelete = messageDAO.getMessageByMessageId(messageId);
         if (messageToDelete == null) {
@@ -72,12 +53,6 @@ public class MessageService {
         return messageToDelete;
     }
 
-    /**
-     * 
-     * @param messageId
-     * @param messageText
-     * @return
-     */
     public Message updateMessageByMessageId(int messageId, String messageText) {
         if (messageDAO.getMessageByMessageId(messageId) == null) {
             return null;
@@ -95,11 +70,6 @@ public class MessageService {
         return messageDAO.getMessageByMessageId(messageId);
     }
 
-    /**
-     * 
-     * @param accountId
-     * @return
-     */
     public List<Message> getAllMessagesByAccountId(int accountId) {
         return messageDAO.getAllMessagesByAccountId(accountId);
     }
