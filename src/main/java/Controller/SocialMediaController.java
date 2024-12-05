@@ -1,5 +1,14 @@
 package Controller;
 
+import java.util.List;
+import java.util.Objects;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import Model.Account;
+import Model.Message;
 import Service.AccountService;
 import Service.MessageService;
 import io.javalin.Javalin;
@@ -58,24 +67,48 @@ public class SocialMediaController {
      * 
      * @param context the Javalin context object
      */
-    private void registrationHandler(Context context) {
-
+    private void registrationHandler(Context context) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Account accountToRegister = objectMapper.readValue(context.body(), Account.class);
+        Account registeredAccount = accountService.register(accountToRegister);
+        if (registeredAccount != null) {
+            String registeredAccountAsString = objectMapper.writeValueAsString(registeredAccount);
+            context.json(registeredAccountAsString);
+        } else {
+            context.status(400);
+        }
     }
 
     /**
      * 
      * @param context the Javalin context object
      */
-    private void loginHandler(Context context) {
-
+    private void loginHandler(Context context) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Account accountToLogin = objectMapper.readValue(context.body(), Account.class);
+        Account loggedInAccount = accountService.login(accountToLogin);
+        if (loggedInAccount != null) {
+            String loggedInAccountAsString = objectMapper.writeValueAsString(loggedInAccount);
+            context.json(loggedInAccountAsString);
+        } else {
+            context.status(401);
+        }
     }
 
     /**
      * 
      * @param context the Javalin context object
      */
-    private void createMessageHandler(Context context) {
-
+    private void createMessageHandler(Context context) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Message messageToCreate = objectMapper.readValue(context.body(), Message.class);
+        Message createdMessage = messageService.createMessage(messageToCreate);
+        if (createdMessage != null) {
+            String createdMessageAsString = objectMapper.writeValueAsString(createdMessage);
+            context.json(createdMessageAsString);
+        } else {
+            context.status(400);
+        }
     }
 
     /**
@@ -83,7 +116,8 @@ public class SocialMediaController {
      * @param context the Javalin context object
      */
     private void getAllMessagesHandler(Context context) {
-
+        List<Message> messages = messageService.getAllMessages();
+        context.json(messages);
     }
 
     /**
@@ -91,7 +125,13 @@ public class SocialMediaController {
      * @param context the Javalin context object
      */
     private void getMessageByMessageIdHandler(Context context) {
-
+        int messageId = Integer.parseInt(Objects.requireNonNull(context.pathParam("message_id")));
+        Message message = messageService.getMessageByMessageId(messageId);
+        if (message != null) {
+            context.json(message);
+        } else {
+            context.status(200);
+        }
     }
 
     /**
@@ -99,15 +139,30 @@ public class SocialMediaController {
      * @param context the Javalin context object
      */
     private void deleteMessageByMessageIdHandler(Context context) {
-
+        int messageId = Integer.parseInt(Objects.requireNonNull(context.pathParam("message_id")));
+        Message message = messageService.deleteMessageByMessageId(messageId);
+        if (message != null) {
+            context.json(message);
+        } else {
+            context.status(200);
+        }
     }
 
     /**
      * 
      * @param context the Javalin context object
      */
-    private void updateMessageByMessageIdHandler(Context context) {
-
+    private void updateMessageByMessageIdHandler(Context context) throws JsonProcessingException {
+        int messageId = Integer.parseInt(Objects.requireNonNull(context.pathParam("message_id")));
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(context.body());
+        String messageText = jsonNode.get("message_text").asText();
+        Message message = messageService.updateMessageByMessageId(messageId, messageText);
+        if (message != null) {
+            context.json(message);
+        } else {
+            context.status(400);
+        }
     }
 
     /**
@@ -115,6 +170,8 @@ public class SocialMediaController {
      * @param context the Javalin context object
      */
     private void getAllMessagesByAccountIdHandler(Context context) {
-
+        int accountId = Integer.parseInt(Objects.requireNonNull(context.pathParam("account_id")));
+        List<Message> messages = messageService.getAllMessagesByAccountId(accountId);
+        context.json(messages);
     }
 }
