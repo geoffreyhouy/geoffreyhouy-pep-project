@@ -40,16 +40,16 @@ public class SocialMediaController {
         app.get("/messages", this::getAllMessagesHandler);
 
         // #5. Read a specific message
-        app.get("/messages/{message_id}", this::getMessageByMessageIDHandler);
+        app.get("/messages/{message_id}", this::getMessageByMessageIdHandler);
 
         // #6. Delete a specific message
-        app.delete("/messages/{message_id}", this::deleteMessageByMessageIDHandler);
+        app.delete("/messages/{message_id}", this::deleteMessageByMessageIdHandler);
 
         // #7. Update a specific message
-        app.patch("/messages/{message_id}", this::updateMessageByMessageIDHandler);
+        app.patch("/messages/{message_id}", this::updateMessageByMessageIdHandler);
 
         // #8. Read all messages by a specific user
-        app.get("/accounts/{account_id}/messages", this::getAllMessagesByAccountIDHandler);
+        app.get("/accounts/{account_id}/messages", this::getAllMessagesByAccountIdHandler);
 
         return app;
     }
@@ -90,7 +90,7 @@ public class SocialMediaController {
      * 
      * @param context the Javalin context object
      */
-    private void getMessageByMessageIDHandler(Context context) {
+    private void getMessageByMessageIdHandler(Context context) {
 
     }
 
@@ -98,7 +98,7 @@ public class SocialMediaController {
      * 
      * @param context the Javalin context object
      */
-    private void deleteMessageByMessageIDHandler(Context context) {
+    private void deleteMessageByMessageIdHandler(Context context) {
 
     }
 
@@ -106,7 +106,7 @@ public class SocialMediaController {
      * 
      * @param context the Javalin context object
      */
-    private void updateMessageByMessageIDHandler(Context context) {
+    private void updateMessageByMessageIdHandler(Context context) {
 
     }
 
@@ -114,7 +114,7 @@ public class SocialMediaController {
      * 
      * @param context the Javalin context object
      */
-    private void getAllMessagesByAccountIDHandler(Context context) {
+    private void getAllMessagesByAccountIdHandler(Context context) {
 
     }
 }
